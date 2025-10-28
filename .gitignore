@@ -1,0 +1,18 @@
+# Visual Studio
+.vs/
+*.suo
+*.user
+.vscode/
+
+# SQL Server
+*.mdf
+*.ldf
+*.bak
+
+# Backups
+05_Backups/
+
+# Temporaires
+*.tmp
+*.log
+Thumbs.db
