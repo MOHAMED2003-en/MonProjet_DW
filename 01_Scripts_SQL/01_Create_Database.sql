@@ -1,22 +1,26 @@
-﻿-- Script de création des databases
--- Auteur: Votre nom
--- Date: 2025-10-28
-
-USE master;
+﻿USE master; 
 GO
 
--- Créer database Staging
-IF NOT EXISTS (SELECT name FROM sys.databases WHERE name = 'Staging')
-BEGIN
-    CREATE DATABASE Staging;
-    PRINT 'Database Staging créée avec succès';
-END
-GO
+IF DB_ID('LightAdventureWorksDW') IS NOT NULL 
+    DROP DATABASE LightAdventureWorksDW; 
+GO 
 
--- Créer database DW_Project
-IF NOT EXISTS (SELECT name FROM sys.databases WHERE name = 'DW_Project')
-BEGIN
-    CREATE DATABASE DW_Project;
-    PRINT 'Database DW_Project créée avec succès';
-END
+CREATE DATABASE LightAdventureWorksDW 
+ON PRIMARY 
+(
+    NAME = N'LightAdventureWorksDW', 
+    FILENAME = N'C:\MonProjet_DW\LightAdventureWorksDW.mdf', 
+    SIZE = 307200KB,
+    FILEGROWTH = 10240KB
+) 
+LOG ON 
+(
+    NAME = N'LightAdventureWorksDW_log', 
+    FILENAME = N'C:\MonProjet_DW\LightAdventureWorksDW_log.ldf', 
+    SIZE = 51200KB,
+    FILEGROWTH = 10%
+); 
+GO 
+
+ALTER DATABASE LightAdventureWorksDW SET RECOVERY SIMPLE WITH NO_WAIT; 
 GO
